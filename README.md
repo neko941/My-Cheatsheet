@@ -103,3 +103,119 @@ pprint(list)
  'k',
  'o']
  ```
+
+
+
+# 3. Directory
+## 3.1 List in the Current Directory 
+```python
+import os
+ 
+print("\n".join(os.listdir()))
+```
+```
+1
+demo.docx
+demo.py
+demo.txt
+demo.xlsx
+```
+## 3.2 List in the Current Directory (specific file extenstion)
+## 3.2.1
+```python
+import glob
+
+for file in glob.glob("*.txt"):
+    print(file)
+```
+```
+demo.txt
+```
+## 3.2.2
+```python
+import os
+
+for file in os.listdir():
+    if file.endswith(".txt"):
+        print(file)
+```
+```
+demo.txt
+```
+## 3.3 List in the Current Directory (with full path)
+```python
+import os
+
+for element in os.listdir():
+    files_path = os.path.abspath(element)
+    print(files_path)
+```
+```
+C:\Users\nguye\Desktop\Python Test Folder\demo\1
+C:\Users\nguye\Desktop\Python Test Folder\demo\demo.docx
+C:\Users\nguye\Desktop\Python Test Folder\demo\demo.py
+C:\Users\nguye\Desktop\Python Test Folder\demo\demo.txt
+C:\Users\nguye\Desktop\Python Test Folder\demo\demo.xlsx
+```
+## 3.4 List Directory Tree
+```python
+import os
+
+for root, directory, files in os.walk(os.getcwd()):
+    for file in files:
+        print(f"File: {file}")
+        print(f"Directory: {directory}")
+        print(f"Path: {file}")
+        print(f"Full Path: {os.path.join(root, file)}", end = "\n\n")
+```
+```
+File: demo.docx
+Directory: ['1']
+Path: demo.docx
+Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\demo.docx
+
+File: demo.py
+Directory: ['1']
+Path: demo.py
+Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\demo.py
+
+File: demo.txt
+Directory: ['1']
+Path: demo.txt
+Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\demo.txt
+
+File: demo.xlsx
+Directory: ['1']
+Path: demo.xlsx
+Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\demo.xlsx
+
+File: 1 - demo.docx
+Directory: ['2']
+Path: 1 - demo.docx
+Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\1 - demo.docx
+
+File: 1 - demo.txt
+Directory: ['2']
+Path: 1 - demo.txt
+Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\1 - demo.txt
+
+File: 1 - demo.xlsx
+Directory: ['2']
+Path: 1 - demo.xlsx
+Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\1 - demo.xlsx
+
+File: 2 - demo.docx
+Directory: []
+Path: 2 - demo.docx
+Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\2\2 - demo.docx
+
+File: 2 - demo.txt
+Directory: []
+Path: 2 - demo.txt
+Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\2\2 - demo.txt
+
+File: 2 - demo.xlsx
+Directory: []
+Path: 2 - demo.xlsx
+Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\2\2 - demo.xlsx
+```
