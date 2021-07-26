@@ -222,33 +222,32 @@ Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\2\2 - demo.xlsx
 ```
 ### 3.4.2
 ```python
-import os
-
-def list_files(path):
+def print_directory_tree(path, indent):
     for root, directories, files in os.walk(path):
         level = root.replace(path, "").count(os.sep)
-        indent = " " * 2 * (level)
-        print(f"{indent}{os.path.basename(root)}/")
-        subindent = " " * 2 * (level + 1)
-        for file in files:
-            print(f"{subindent}{file}")
+        indent = "   " * level
+        print(f"{indent}└──{os.path.basename(root)}/")
 
-list_files(os.getcwd())
+        subindent = "   " * (level + 1)
+        for file in files:
+            print(f"{subindent}└──{file}")
+
+print_directory_tree(os.getcwd(), "")
 ```
 ```
-demo/
-  demo.docx
-  demo.py
-  demo.txt
-  demo.xlsx
-  1/
-    1 - demo.docx
-    1 - demo.txt
-    1 - demo.xlsx
-    2/
-      2 - demo.docx
-      2 - demo.txt
-      2 - demo.xlsx
+└──demo/
+   └──demo.docx
+   └──demo.py
+   └──demo.txt
+   └──demo.xlsx
+   └──1/
+      └──1 - demo.docx
+      └──1 - demo.txt
+      └──1 - demo.xlsx
+      └──2/
+         └──2 - demo.docx
+         └──2 - demo.txt
+         └──2 - demo.xlsx
 ```
 ### 3.4.3
 ```python
@@ -257,26 +256,32 @@ import os
 def print_directory_tree(path, indent):
     for elements in os.listdir(path):
         new_path = os.path.join(path, elements)
-        if os.path.isdir(new_path):
-            print(f"{indent}{elements}/")
-            print_directory_tree(new_path, indent + "  ")
+        if elements == os.listdir(path)[-1]:
+            if os.path.isdir(new_path):
+                print(f"{indent}└──{elements}")
+                print_directory_tree(new_path,indent + "  ")
+            else:
+                print(f"{indent}└──{elements}")
         else:
-            print(f"{indent}{elements}")
-    indent += "  ";        
-
+            if os.path.isdir(new_path):
+                print(f"{indent}├──{elements}")
+                print_directory_tree(new_path,indent + "│  ")
+            else:
+                print(f"{indent}├──{elements}")
+            
 print_directory_tree(os.getcwd(), "")
 ```
 ```
-1/
-  1 - demo.docx
-  1 - demo.txt
-  1 - demo.xlsx
-  2/
-    2 - demo.docx
-    2 - demo.txt
-    2 - demo.xlsx
-demo.docx
-demo.py
-demo.txt
-demo.xlsx
+├──1
+│  ├──1 - demo.docx
+│  ├──1 - demo.txt
+│  ├──1 - demo.xlsx
+│  └──2
+│    ├──2 - demo.docx
+│    ├──2 - demo.txt
+│    └──2 - demo.xlsx
+├──demo.docx
+├──demo.py
+├──demo.txt
+└──demo.xlsx
 ```
