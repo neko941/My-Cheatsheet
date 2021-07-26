@@ -12,7 +12,6 @@ from tqdm import tqdm
 for i in tqdm(range(100)):
     time.sleep(.01)
 ```
-
 ### 1.1.2
 ```python
 import time
@@ -32,3 +31,75 @@ with alive_bar(100) as bar:
         time.sleep(.01)
         bar()
 ```
+
+
+
+# 2. List
+## 2.1 Print List
+### 2.1.1
+```python
+list = ["N", "e", "k", "o"]
+
+print(list)
+```
+```
+['N', 'e', 'k', 'o']
+```
+### 2.1.2
+```python
+list = ["N", "e", "k", "o"]
+
+print("\n".join(list))
+```
+```
+N
+e
+k
+o
+```
+### 2.1.3
+```python
+list = ["N", "e", "k", "o"]
+
+for element in list:
+    print(element)
+```
+```
+N
+e
+k
+o
+```
+### 2.1.4
+```python
+from pprint import pprint
+
+list = ["N", "e", "k", "o"]
+pprint(list)
+
+list = list*5
+pprint(list)
+```
+```
+['N', 'e', 'k', 'o']
+['N',
+ 'e',
+ 'k',
+ 'o',
+ 'N',
+ 'e',
+ 'k',
+ 'o',
+ 'N',
+ 'e',
+ 'k',
+ 'o',
+ 'N',
+ 'e',
+ 'k',
+ 'o',
+ 'N',
+ 'e',
+ 'k',
+ 'o']
+ ```
