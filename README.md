@@ -264,9 +264,10 @@ print_directory_tree(os.getcwd(), "", True)
 ```
 ### 3.4.3
 ```python
+import os
 import seedir as sd
 
-sd.seedir("demo", style='emoji')
+sd.seedir(os.getcwd(), style='emoji')
 ```
 ```
 📁 demo/
