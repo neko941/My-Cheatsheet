@@ -264,52 +264,23 @@ print_directory_tree(os.getcwd(), "", True)
 ```
 ### 3.4.3
 ```python
-import os
+import seedir as sd
 
-number_of_directs_and_files = [0, 0]
-
-def print_directory_tree(path, indent, root):
-    files = 0
-    directories = 0
-    if root:
-        print(f"{indent}└──{os.path.basename(path)}")
-        root = False
-        indent += "    "
-    for elements in os.listdir(path):
-        new_path = os.path.join(path, elements)
-        if elements == os.listdir(path)[-1]:
-            if os.path.isdir(new_path):
-                print(f"{indent}└──{elements}")
-                print_directory_tree(new_path,indent + "  ", root)
-                number_of_directs_and_files[0] += 1  
-            else:
-                print(f"{indent}└──{elements}")
-                number_of_directs_and_files[1] +=1
-        else:
-            if os.path.isdir(new_path):
-                print(f"{indent}├──{elements}")
-                print_directory_tree(new_path,indent + "│  ", root)
-                number_of_directs_and_files[0] +=1
-            else:
-                print(f"{indent}├──{elements}")
-                number_of_directs_and_files[1] +=1
-            
-print_directory_tree(os.getcwd(), "", True)
-print(f"{number_of_directs_and_files[0]} directories, {number_of_directs_and_files[1]} files")
+sd.seedir("demo", style='emoji')
 ```
 ```
-└──demo
-    ├──1
-    │  ├──1 - demo.docx
-    │  ├──1 - demo.txt
-    │  ├──1 - demo.xlsx
-    │  └──2
-    │    ├──2 - demo.docx
-    │    ├──2 - demo.txt
-    │    └──2 - demo.xlsx
-    ├──demo.docx
-    ├──demo.py
-    ├──demo.txt
-    └──demo.xlsx
-2 directories, 10 files
+📁 demo/
+├─📁 1/
+│ ├─📄 1 - demo.docx
+│ ├─📄 1 - demo.txt
+│ ├─📄 1 - demo.xlsx
+│ └─📁 2/
+│   ├─📄 2 - demo.docx
+│   ├─📄 2 - demo.txt
+│   └─📄 2 - demo.xlsx
+├─📄 demo.docx
+├─📄 demo.ipynb
+├─📄 demo.py
+├─📄 demo.txt
+└─📄 demo.xlsx
 ```
