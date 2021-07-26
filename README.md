@@ -165,59 +165,40 @@ import os
 for root, directories, files in os.walk(os.getcwd()):
     for file in files:
         print(f"File: {file}")
-        print(f"Directory: {directories}")
-        print(f"Path: {file}")
         print(f"Full Path: {os.path.join(root, file)}", end = "\n\n")
 ```
 ```
 File: demo.docx
-Directory: ['1']
-Path: demo.docx
 Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\demo.docx
 
+File: demo.ipynb
+Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\demo.ipynb
+
 File: demo.py
-Directory: ['1']
-Path: demo.py
 Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\demo.py
 
 File: demo.txt
-Directory: ['1']
-Path: demo.txt
 Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\demo.txt
 
 File: demo.xlsx
-Directory: ['1']
-Path: demo.xlsx
 Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\demo.xlsx
 
 File: 1 - demo.docx
-Directory: ['2']
-Path: 1 - demo.docx
 Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\1 - demo.docx
 
 File: 1 - demo.txt
-Directory: ['2']
-Path: 1 - demo.txt
 Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\1 - demo.txt
 
 File: 1 - demo.xlsx
-Directory: ['2']
-Path: 1 - demo.xlsx
 Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\1 - demo.xlsx
 
 File: 2 - demo.docx
-Directory: []
-Path: 2 - demo.docx
 Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\2\2 - demo.docx
 
 File: 2 - demo.txt
-Directory: []
-Path: 2 - demo.txt
 Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\2\2 - demo.txt
 
 File: 2 - demo.xlsx
-Directory: []
-Path: 2 - demo.xlsx
 Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\2\2 - demo.xlsx
 ```
 ### 3.4.2
@@ -258,6 +239,7 @@ print_directory_tree(os.getcwd(), "", True)
     │    ├──2 - demo.txt
     │    └──2 - demo.xlsx
     ├──demo.docx
+    ├──demo.ipynb
     ├──demo.py
     ├──demo.txt
     └──demo.xlsx
