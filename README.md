@@ -222,35 +222,6 @@ Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\2\2 - demo.xlsx
 ```
 ### 3.4.2
 ```python
-def print_directory_tree(path, indent):
-    for root, directories, files in os.walk(path):
-        level = root.replace(path, "").count(os.sep)
-        indent = "   " * level
-        print(f"{indent}└──{os.path.basename(root)}/")
-
-        subindent = "   " * (level + 1)
-        for file in files:
-            print(f"{subindent}└──{file}")
-
-print_directory_tree(os.getcwd(), "")
-```
-```
-└──demo/
-   └──demo.docx
-   └──demo.py
-   └──demo.txt
-   └──demo.xlsx
-   └──1/
-      └──1 - demo.docx
-      └──1 - demo.txt
-      └──1 - demo.xlsx
-      └──2/
-         └──2 - demo.docx
-         └──2 - demo.txt
-         └──2 - demo.xlsx
-```
-### 3.4.3
-```python
 import os
 
 def print_directory_tree(path, indent, root):
