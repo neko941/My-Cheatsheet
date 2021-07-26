@@ -158,13 +158,14 @@ C:\Users\nguye\Desktop\Python Test Folder\demo\demo.txt
 C:\Users\nguye\Desktop\Python Test Folder\demo\demo.xlsx
 ```
 ## 3.4 List Directory Tree
+### 3.4.1
 ```python
 import os
 
-for root, directory, files in os.walk(os.getcwd()):
+for root, directories, files in os.walk(os.getcwd()):
     for file in files:
         print(f"File: {file}")
-        print(f"Directory: {directory}")
+        print(f"Directory: {directories}")
         print(f"Path: {file}")
         print(f"Full Path: {os.path.join(root, file)}", end = "\n\n")
 ```
@@ -218,4 +219,34 @@ File: 2 - demo.xlsx
 Directory: []
 Path: 2 - demo.xlsx
 Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\2\2 - demo.xlsx
+```
+### 3.4.2
+```python
+import os
+
+def list_files(path):
+    for root, directories, files in os.walk(path):
+        level = root.replace(path, "").count(os.sep)
+        indent = " " * 2 * (level)
+        print(f"{indent}{os.path.basename(root)}/")
+        subindent = " " * 2 * (level + 1)
+        for file in files:
+            print(f"{subindent}{file}")
+
+list_files(os.getcwd())
+```
+```
+demo/
+  demo.docx
+  demo.py
+  demo.txt
+  demo.xlsx
+  1/
+    1 - demo.docx
+    1 - demo.txt
+    1 - demo.xlsx
+    2/
+      2 - demo.docx
+      2 - demo.txt
+      2 - demo.xlsx
 ```
