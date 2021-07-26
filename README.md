@@ -121,7 +121,7 @@ demo.txt
 demo.xlsx
 ```
 ## 3.2 List in the Current Directory (specific file extenstion)
-## 3.2.1
+### 3.2.1
 ```python
 import glob
 
@@ -131,7 +131,7 @@ for file in glob.glob("*.txt"):
 ```
 demo.txt
 ```
-## 3.2.2
+### 3.2.2
 ```python
 import os
 
