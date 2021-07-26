@@ -262,7 +262,7 @@ print_directory_tree(os.getcwd(), "", True)
     ├──demo.txt
     └──demo.xlsx
 ```
-### 3.4.3 [seedir]{https://github.com/earnestt1234/seedir)
+### 3.4.3 [seedir](https://github.com/earnestt1234/seedir)
 ```python
 import os
 import seedir as sd
