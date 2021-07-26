@@ -250,3 +250,33 @@ demo/
       2 - demo.txt
       2 - demo.xlsx
 ```
+### 3.4.3
+```python
+import os
+
+def print_directory_tree(path, indent):
+    for elements in os.listdir(path):
+        new_path = os.path.join(path, elements)
+        if os.path.isdir(new_path):
+            print(f"{indent}{elements}/")
+            print_directory_tree(new_path, indent + "  ")
+        else:
+            print(f"{indent}{elements}")
+    indent += "  ";        
+
+print_directory_tree(os.getcwd(), "")
+```
+```
+1/
+  1 - demo.docx
+  1 - demo.txt
+  1 - demo.xlsx
+  2/
+    2 - demo.docx
+    2 - demo.txt
+    2 - demo.xlsx
+demo.docx
+demo.py
+demo.txt
+demo.xlsx
+```
