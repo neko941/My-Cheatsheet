@@ -116,8 +116,18 @@ demo.py
 demo.txt
 demo.xlsx
 ```
-## 3.2 List in the Current Directory (specific file extenstion)
-### 3.2.1
+## 3.2 List in the Current Directory (only folders)
+```python
+import glob
+
+for sub_folder in glob.glob("*/"):
+    print(sub_folder)
+```
+```
+demo\
+```
+## 3.3 List in the Current Directory (specific file extenstion)
+### 3.3.1
 ```python
 import glob
 
@@ -127,7 +137,7 @@ for file in glob.glob("*.txt"):
 ```
 demo.txt
 ```
-### 3.2.2
+### 3.3.2
 ```python
 import os
 
@@ -138,7 +148,7 @@ for file in os.listdir():
 ```
 demo.txt
 ```
-## 3.3 List in the Current Directory (with full path)
+## 3.4 List in the Current Directory (with full path)
 ```python
 import os
 
@@ -153,8 +163,8 @@ C:\Users\nguye\Desktop\Python Test Folder\demo\demo.py
 C:\Users\nguye\Desktop\Python Test Folder\demo\demo.txt
 C:\Users\nguye\Desktop\Python Test Folder\demo\demo.xlsx
 ```
-## 3.4 List Directory Tree
-### 3.4.1
+## 3.5 List Directory Tree
+### 3.5.1
 ```python
 import os
 
@@ -197,7 +207,7 @@ Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\2\2 - demo.txt
 File: 2 - demo.xlsx
 Full Path: C:\Users\nguye\Desktop\Python Test Folder\demo\1\2\2 - demo.xlsx
 ```
-### 3.4.2
+### 3.5.2
 ```python
 import os
 
@@ -240,7 +250,7 @@ print_directory_tree(os.getcwd(), "", True)
     ├──demo.txt
     └──demo.xlsx
 ```
-### 3.4.3 [seedir](https://github.com/earnestt1234/seedir)
+### 3.5.3 [seedir](https://github.com/earnestt1234/seedir)
 ```python
 import os
 import seedir as sd
