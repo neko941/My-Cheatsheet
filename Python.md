@@ -349,3 +349,22 @@ demo
 
 2 directories, 11 files
 ```
+# 4. Internet Shorcut
+```python
+import pythoncom
+from win32com.shell import shell, shellcon
+import os
+
+def internetShorcut(path, url, file_name):
+	shortcut = pythoncom.CoCreateInstance (
+	  shell.CLSID_InternetShortcut,
+	  None,
+	  pythoncom.CLSCTX_INPROC_SERVER,
+	  shell.IID_IUniformResourceLocator
+	)
+	shortcut.SetURL(url)
+	persist_file = shortcut.QueryInterface (pythoncom.IID_IPersistFile)
+	persist_file.Save(os.path.join (path, file_name), 0)
+    
+internetShorcut(os.getcwd(), "http://bit.ly/neko941", "Neko941's Hi-res Collection.url")
+```
