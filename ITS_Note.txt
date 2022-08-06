@@ -1,0 +1,533 @@
+-------------------------------------------------------------------
+CHAPTER 1: INTRODUCTION	
+	- Why:
+		+ important economic factor
+		+ stored, retrieved, proccessed electronically
+		+ to protect valuable asset
+	- what: 
+		+ protect asgainst:
+			. unauthorized access 
+			. modification
+		+ availability of info sys services for legitimate users
+		+ measure to avoid thwart, dicover and log threats
+		
+	- Aims:
+		+ Confidentiality: protection against unauthorized access
+		+ Integeirty: protection against unauthorized modification
+		+ Availability: resources and services are available for legitimate users
+		+ Authenticity and authentication: unambiguous identification of sender of a communication peer
+		+ Nonrepudiation: ability to prove that a given message was sent and by whom to a thied party not involved in communication
+		+ Authorization: access to resources is limited to certain group of authenticated users
+		+ the difference between authenticity and nonrepudiation is identification of the sender of info
+	- Attack on ITS:
+		+ Passive attack:
+			. attacker does not actively participate
+			. ex: snooping and wiretapping
+			. difficult to discover 
+			. preventive means of protection against actice attack
+		+ Actice attack:
+			. acctacker actively manipulates sustem
+			. manipulation of data or sys
+			. attacker often leaves traces
+			. prevention and detection possible
+		+ Aims:
+			. depends on attacker
+			. nerds and geeks => criminal
+			. insder / outsider
+	- Vulnerabilites: successfull acttack require vulnerbilities:
+		+ Error in requirements
+		+ Error in design
+		+ Error in implementation
+		+ Installation and administration errors
+	- Risk:
+		+ occurrence probability
+		+ consequences
+	- Alternatives: 
+		+ leave (knwon) vulnerability as is
+		+ eliminate vulnerability
+		+ shutdown the sys
+		+ choice depends on aims of decision maker:
+			. economic: the least expensive
+			. pratical: lowest occurence probabilities / consequences
+	- ITS is a process: 
+		do -------> check 
+		 ^	      |
+		 |	      ↓
+		plan <------ act
+
+-------------------------------------------------------------------
+CHAPTER 2: CRYPTOGRAPHY
+	- Cryptology:
+		+ Cyptography: math technique realated to info sec (confidentiality, integrity, authentication,...)
+		+ Cryptanalysis: brak cryptographic techniques
+	- Model: 
+		+ Encryption: Ciphertext = Plaintext + Encryption key + Encryption method
+		+ Decryption: Plaintext = Ciphertext + Decryption key + Decryption method
+	- Classical Encyption Method:
+		+ Substitution: Substitute symbol or group of symbols by other symbol or group of symbols, order is preserved
+		+ Transpostition: Retain symbols but change order
+		+ Product cipher: Combine of Substitution and Transpostition
+		+ Applying multiple substitutions and/or transpositions possible
+	- What should remain secret:
+		+ Security should not depend on secrecy of the method
+		+ no key and method private 
+		+ method and key private
+		+ method public and key private
+			. opensouce helps fix weaknesses 
+			. unbreakable with one-time-pad (randomly 1 and 0 series with similar length of the plaintext)
+	- Decipher:
+		+ cryptanalysis
+		+ brute-force-attack: try all posibility
+			. has ciphertext
+			. expected plaintext
+			. short key can be broken
+		+ statistical properties of cipher text
+			. reflects frequency of alphabet => can easily break subsitution cipher
+		+ ciphertext-only-attack
+		+ knwon-plaintext-attack
+		+ chosen-plaintext-attack
+	- Modes of Operation
+		+ Electronic Code Book (ECB)
+		+ Cipher Block Chaining
+		+ Cipher Feedback Mode
+		+ Output Feedback Mode
+		+ Counter Mode
+		
+-------------------------------------------------------------------
+CHAPTER 3: AUTHENTICATION
+	- aim: identify the sender of info / communication peer
+	- Factors of authentication
+		+ wat u know:
+			. password:
+				> shared secret for authentication
+				> depends on:
+				    >> size pwd domain: the longer the better
+				    >> choice of pwd: never use a pwd twice
+				    >> pwd policies: the more difficult the better
+				    >> security of storing password
+					>>> user: using tool to store pwd encrypted
+					>>> server: store cryptographic hash pwd, using salt
+				    >> security when entering/transmitting password
+					>>> Challenge-Response:
+					    	>>>> server sends to user a random string (salt)(one time used)
+					    	>>>> user sends to server result of `hash(salt + pwd)`
+						>>>> sever compute `hash(salt + pwd)` and compare with user
+			. PIN
+			. TAN
+		+ wat u have:
+			. token: constantly changed
+			. smart card
+			. cryptographic key
+		+ wat u r: biometry
+			. fingerprint
+			. eyeprint
+	- Digital Signature:
+		+ aims: authenticity, integrity, nonrepudiation
+		+ public key cryptography: 
+			. sender signs message with private key
+			. public key is used for validation
+		+ Only a “fingerprint” of the message is digitally signed
+	- Cryptographic Hash Function:
+		+ convert data to a fixed length string
+		+ mostly 128 or 256 bit
+		+ cannot be decoded
+		+ no 2 messages with the same hash value
+	- Certificate authority: 
+		+ stores, signs, and issues digital certificates
+		+ acts as a trusted third party by the owner of the certificate and by the party relying upon the certificate
+		+ cotains:
+			. Identity of the Subject
+			. Issuer's Digital signature
+			. Subject's Public key
+
+-------------------------------------------------------------------
+CHAPTER 4: OS SECURITY
+        - OS is
+        	+ Extended Machine:
+			. hides compicated details from users
+			. provides Virtual Machine
+		+ Resource Manager: Allocate resources to diff users, processes
+	- Access Control:
+		+ ex: '-rw-r--r-x  1 neko neko   49698 Aug  2 08:27 configparser34.py'
+			. -: file type
+			. rw-: permission of owner	
+			. r--: permission of group
+			. r-x: permission of others
+			. 1: numbers of hard links
+			. neko: name owner
+			. neko: name gr
+			. 49698: size 
+			. Aug  2 08:27: time created
+			. configparser34.py: file name
+	- Encryption at diff level:
+		+ Application / User
+		+ OS
+		+ Device / hardware
+	- Hardening: reducing its surface of vulnerability
+	
+-------------------------------------------------------------------
+CHAPTER 5-1: APPLICATION SECURITY
+	- Application: 
+		+ sofware running on computer in user mode
+		+ not belong to OS 
+	- Buffer overflow: 
+		+ attacker injects his own code into the sys and execute it 
+		+ can gain ad permission
+		+ how it works:
+			. frame for variables are fix
+			. variables larger than memory allocated might not be checked 
+			. overflow over to other cells 
+			. change in return address to the inputs 
+			. attacker's code gets injected
+		+ protect against:
+			. have input validation
+			. Canaries: 
+				> add a random value before return address, 
+				> random value stored in compiler
+				> compiler check if the variable is altered
+				> shutdown or continue the program
+	- Race condition:
+		+ how it wroks:
+			. having multiple processes running 
+			. attacker changes things between time switching processes on the CPU
+		+ protection: semaphore, atoma instructions
+	- Active content
+		+ download and execution application from the internet without the security => attacker can inject malicious code into program
+		+ use certificate to verify that the content of program is not altered => not solve the problem since the program itself has the malicious code
+
+-------------------------------------------------------------------
+CHAPTER 5-2: APPLICATION - VULNERABILITES AND EXPLOITS
+	- exploit: take advantage of a vulnerablility in a program/OS by attacker to comprise a sys/resource
+	- aim: 
+		+ illegitimate access to data
+		+ gain ad permission
+		+ DoS
+	- Classification on "how":
+		+ local: attacker needs physical access or local user account
+		+ remote: over a network without the necessity of previous access to the sys or interaction wth the human victim
+		+ web application: zero-day
+	- Types:
+		+ Security Misconfiguration:
+			. Reason:
+				> insecure default configurations
+				> incomplete configurations
+			. All Os/framwirks/libraries/applicaitons must be securely configured and patched/upgraded in a timely fashion
+			
+		+ Malware: Backdoor
+			. sofware running without user's consent => potentially comprise the sys
+			. allow attacker to bybass security mechanism and gain access to the system
+			. left by hacker after the atk
+		
+		+ Command Injection:
+			. execute commands on host OS via a vulnerable application
+			. possible when an application passes unsafe user-suplied data (forms, cookies,...) to sys shell => lack of input validation
+			. usually execute with the privileges of the vulnerable application
+		+ SQL Injection:
+			 . inject sql code through user-suplied data
+			 . damages:
+			 	+ read/modify DB
+			 	+ execute ad operations on DB
+			 	+ issue commands to the OS
+		+ Cross-Site Scripting (XSS)
+			. type of injection
+			. malicious scripts are injected into benign and trusted website
+			. Client-side browser will execute the script
+			. Script may access cookies, session tokens, or other sensitive information retained by the browser and used with that site
+		+ Stored XSS
+			. Maliciously injected script is permanently stored on the target servers, such as in a database, in a message forum, visitor log,...)
+			. Victim retrieves malicious script from server when it requests information
+		+ Reflected XSS
+			. Injected script is reflected off the web server as response that includes some or all of the input sent to the server as part of the request
+			. Delivered to victims via another route, e.g., e-mail message, or on some other website
+			. Injected code travels from user to vulnerable web site which reflects the attack back to the user’s browser
+			. Browser executes the code because it came from a “trusted” server
+		+ DOM-Based XSS (Client-Side XSS)
+			. Injected malicious script never leaves the client
+			. May also be stored or reflected
+			. could be an element of the HTM
+			. reflected off the web server as response that includes some or all of the input sent to the server as part of the reques
+		+ Cross-Site Request Forgery (CSRF)
+			. forces an end user to execute unwanted actions on a web application in which they’re currently authenticated
+			. Tricks the victim into submitting a malicious request, e.g., to change password, change email, make transaction
+			. Inherits authenticaion e.g., from existing connection or cookie
+			. Aim: Make a state change on the server side
+	- protection:
+		+ turn off unused software
+		+ limit access to sys/services (firewalls,...)
+		+ careful configure
+		+ careful programming
+		+ keep software up to date
+		+ zero-trust networking
+
+-------------------------------------------------------------------
+CHAPTER 5-3: MALWARE
+    - definition: unwanted software running on ur sys / sth not legitimate
+    - types:
+        + rootkit:
+        + ransomware:
+            . software encrypting data on ur sys and u r blackmailed
+            . the process slowly encrypts ur data day by day => cannot know which version to roll back
+        + phising:
+            . fake urls => user may download randsome / enter credential
+            . dont click on link in email, type it 
+        + pharming:
+        	. check web page if encrypted
+        	. check 3rd-party if authenticated by the browser
+        	. check certificate
+        + trojan:
+            . fake being a legitimate program, its actually malicious
+            . uses social engineering to spread
+        + key logger: track the keyboard => get username-password / context
+        + worms:
+        + virus:
+            . detect themself to other program and execute when dat program run
+            . self-replicate themself, spread themself over the sys
+            . infected by: user interaction needed
+            . types:
+                * Program virus: executable
+                * Macro virus:
+            . protection:
+                > virus scanner:
+                    >> ex: window defender
+                    >> signature based:
+                        >>> check typical patterns that a part of the virus
+                        >>> can check only known virus
+                        >>> limit the number of type of virus to scan
+                        >>> cannot check the virus that changed its patterns or encrypted itself (only decrypt before using)
+        + buffer overflow:
+            . vulnerability that allow hacker to inject / execute his code
+        + backdoor:
+            . left by hacker after the atk
+            . log in the machine with username-password with admin permission
+        + bot / bot net
+    - Damages:
+        + Destroy the hardware / software
+        + Reduced usability of machine
+        + data infiltration / misuse
+        + misuse of sys
+        + cost of removal
+    - Malware reacting / cleaning:
+        + shutdown the machine / disconnect from network
+        + clone harddrive
+        + boot from other OS:
+            . assess dmg
+            . repair if possible
+            . identify vulnerabilities (forensis)
+        + restore sys:
+            . fresh install OS
+            . restore data from backup
+    - Classification:
+        + need user interaction:
+            . self-replicating:     virus
+            . not self-replicating: ransomware, trojan, spyware(keylogger)
+        + no user interaction:
+            . self-replicating:     worm
+            . not self-replicating: backdoor
+
+-------------------------------------------------------------------
+CHAPTER 8: NETWORK SECURITY
+	- Threats
+		+ intercept: gain access to the information
+		+ manipulate: alter the information
+		+ spoof: impersonate the sender/receiver
+		+ disrupt: denial of service
+	- Vulnerabilities:
+		+ Sniffing: have ad oermission on 1 machine in the network
+		+ Manipulation: 
+			. manipulate the meeasge => message to reciever may be altered
+			. protection: 
+				> encrypt data while transfer => only protect the content, not apply to the header of communication protocol 
+				> Authentication and difital signature
+		+ Address Resolution Protocol (ARP) Spoofing:
+		+ IP Spoofing:
+		+ TCP Sequence Number Attack
+		+ DNS Spoofing
+		
+	- Security Protocol: security should be ensure on all layers
+		+ Application Layer Security:
+			. data in encrypted before passing to the transport layer => allows to communicate through unsecured network
+			. end-to-end protection
+			. independent of the network security
+			. Dis: mechanisms must be built in application => complex and not reusable => solved by using a general tool for the encryption of application
+		+ Transport Layer Security:
+			. unencrypted data passed to the transport layer => transport layer encrypt the data and pass to next layer
+			. advantages: reusable
+			. disadvantages: 
+				> not end-to-end
+				> not transparent <= application must rewrite some code to use the interface
+		+ Network Layer Security:
+			. not end-to-end
+			. transparent
+			. mostly implemented at routers → can use as private network line
+			. advantages: flexible; transparent to upper layers
+			. dis: transparent (upper layers have no idea if the mechanism is used or not)
+		+ Data Link Layer Security:
+			. communicate between stations
+			. ad: allow which station can communicate
+			. disadvantages: local protection
+			
+-------------------------------------------------------------------
+CHAPTER 9: FIREWALL
+	- Firewall:
+		+ stands between intranet and internet
+		+ control traffic between both networks by policies
+		+ filter out and stop unwanted traffic 
+	- packet filter: 
+		+ only up to transport layer
+		+ filter out things dat we dun want in network
+		+ execution of "Action" for the rules in packet filter:
+			. discard packet
+			. forward packet
+			. jump to other rule chain
+		+ works  
+			. compare with chain of rules
+			. no match => execute default action (accept/deny) 
+			. orders of rules important
+	- static packet filter (choose this mf):
+		+ only consider itself => only info within the packet will be considered 
+		+ ads:
+			. stateless
+			. easy to implement
+			. no requirement / info abt previous packets are need to be stored
+			. less to no load balancing issues
+			. throw any packet u want
+		+ problem: 
+			. no distinction between who initial connection (client) or who accept the connection (server) 
+			=> TCP can be faked 
+			=> access to the communication
+	- dynamic filter:
+		+ info from previous packet might be taken into account
+		+ ads:
+			. attack spoof the packet => but no previous info => ez discarded
+	- Limits of packet filter:
+		+ No user data / application specific filtering possible
+		+ use of transport layer info to identify application protocols
+		+ apps with varying port num
+		+ cannot use tunneling and encryption
+	-sudo iptables:
+		-v -L :List of IPs
+		-A : add
+		-p : protocol
+		-j : action/job
+		Ex: sudo iptables -v -L
+		    sudo iptables -A FORWARD -p ICMP -j DROP
+	- Network Address Translation (NAT):
+		+ private ip want to serve in the internet => convert private address to public address => for contacting the services in the internet
+		+ observe the 1st packet of 3 way handshake => setup the translation(IP and port)
+		+ security:
+			. suitable for small business (have only single external IP address)
+			. block incoming connect unless spmtjomg setup routes
+	- Application Level Gateway:
+		+ Works: Client request on ALG where is analysis what happen and forward the request to the server
+		+ Job: 
+			. Access control
+			. Content checking
+			. Logging all activities
+			. up/download control
+		+ Ads:
+			. Dun deal wth Packet Fragment
+			. User specific rules
+			. Fine-gained control
+			. Dectect malware <= content checking
+			. no direct connection between sender and receiver
+			. logging
+		+ Dis:
+			. application specific
+			. exposition to attacker
+	- Demilitazired Zone (DMZ):
+		+ protected from the internet by packet filter
+		+ seperated from the protected internal network by another packet filter
+
+-------------------------------------------------------------------
+CHAPTER 10: VIRTUAL PRIVATE NETWORKS - VPN
+	- Allows to run a secure point-to-point connection between 2 stations 
+	- Can be soft/hardware
+	- Types:
+		+ Site-to-site
+	_ Security mechanism:
+		+ IPsec:
+			. security services n network layer
+			. work with IPv4 and IPv6
+			. below IP protocol
+			. IPsec protect the IP packet being processed on machine
+	- Authentication header (AH): 
+		+ allow for authentication of the sender to ensure the integrity of protected packet, no encryption
+		+ in transport mode: IP header remain unchanged, IP header is authentication header which content the info
+		+ in tunnel mode: new IP header => authenticate a header field (AH), IP header(original), data
+	- Encapsulating security payload (ESP): 
+		+ allow for authentication of the sender to ensure the integrity of protected packet as wll as encryption
+		+ used to check integrity and confidential
+		+ in transport mode: data and ESP trailer with the encryption
+		+ in tunnel mode: Integrity Check Value will be encypted with IP header, data, ESP trailer
+	- OpenVPN:
+		+ IPsec is limited to receiving and transmitting data on the network layer
+		+ more flexible and can operate on the network layer and data link layer
+		+ transmit data between 2 new virtual interface Open
+		+ use transport protocol TLS/SSL
+		+ works: 
+			. creating vitual interfaces in user space 
+			. set up a direct point to point connection between 2 new virtual interface
+
+	- Risk:
+		+ timeSplit tunneling
+			. client can use public and local network at the same time
+			. decide which data sent through VPN tunnel 
+			. advantages: 
+				> reduce VPN traffic => increase internet speed
+				> endable access to multiple networks 
+			. risk:
+				> attacker can infect to computer with weak security
+				> gain access to VPN secure channel
+		
+-------------------------------------------------------------------
+CHAPTER 13: NETWORK APPLICATION
+	- Email
+		+ How it work
+			. sender contact its mail server (SMTP)
+			. sender authenticates withe mail server
+			. mail server take the message
+			. mail server contact the recipient mail server (STMTP) 
+			. recipient mail server accecpt the message from
+			. put the mail into the recipient mail box
+			. user fetch mail from recipient mail server (POP/IMAP)
+		+ need a recipient mail server to sort out mails
+		+ not end-to-end encryption
+		+ solution: application layer encryption (X/MINE)
+	- SSH
+		+ SSH transport protocol
+			. state authentication, confidentiality, and integrity
+			. TCP port 22
+			. multiple logical channels
+		+ SSH channel for advanced functions (forward GUI,...)
+		+ SSH Port Forwarding:
+			. Local Port Forwarding (transparent):
+				> A has SSH connection with B
+				> D wants to connect to S
+				> D establish TCP connection with A at port A : x
+				> A sends encrypted data to B
+				> B establish TCP connection with S at port S : y
+				⇒ get access to a server without the access rights ⇒ bypass firewall & no authentication needed
+			. Remote Port Forwarding
+			. Dynamic Port Forwarding (not transparent):
+				> A has SSH connection with B
+				> D establish SOCKS Proxy connection with A at port A : x
+				> A sends encrypted data to B
+				> B establish SOCKS Proxy connection with Destination specified By Host D
+	- World Wide Web
+	
+-------------------------------------------------------------------
+ipsec - network / datalink
+openvpn - transport
+ssh - application
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
