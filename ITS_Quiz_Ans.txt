@@ -1,0 +1,330 @@
+-------------------------------------------------------------------
+CHAPTER 1: INTRODUCTION	
+	1. "Protection against unauthorized modification" is referred to as ___
+		[ ] Availability
+		[ ] Authentication
+		[ ] Authorization
+		[ ] Confidentiality
+		[x] Integrity
+		[ ] Nonrepudiation
+		
+	2. "Protection against unauthorized access" is referred to as ___
+		[ ] Availability
+		[] Authentication
+		[ ] Authorization
+		[x] Confidentiality
+		[ ] Integrity
+		[ ] Nonrepudiation
+		
+	3. "Unambiguous identification of the sender of information or a communication peer" is referred to as ___
+		[ ] Availability
+		[x] Authentication
+		[ ] Authorization
+		[ ] Confidentiality
+		[ ] Integrity
+		[ ] Nonrepudiation
+		
+	4. Which of the CIA-principles can usually not be achieved by cryptograhpic means?
+		[ ] Availability
+		[x] Authentication
+		[x] Authorization
+		[ ] Confidentiality
+		[ ] Integrity
+		[x] Nonrepudiation
+		
+	5. Define "Nonrepudiation":
+		> ability to prove that a given message was sent and by whom to a thied party not involved in communication
+		
+	6. An active attack ___
+		[x] requires some activity from an attacker
+		[x] leaves traces that can be detected
+		[ ] need not be prevented as it can be detected
+		
+	7. How is an exploit called which is not yet publicly known? 
+		[ ] Unkown Exploit
+		[ ] Malicious Exploit
+		[ ] Cross-site Exploit
+		[ ] Zero-day Exploit
+		[ ] Serect Exploit
+
+-------------------------------------------------------------------
+CHAPTER 2: CRYPTOGRAPHY
+	1. What does ECB stand for? 
+		> Electronic Code Book
+		
+	2. AES ___
+		[ ] stands for Automatically Encrypted Session
+		[ ] uses a block size of 64 bits
+		[ ] may use a key of size 256 bits
+		[ ] can be used with Cipher Block Chaining
+		[ ] is a Public Key cryptosystem
+		[ ] is a hybrid crypto scheme
+		[ ] is organized in rounds
+		[ ] shound not be used anymore
+		
+	3. Mark the right answers 
+		Public Key Cryptography		Symmetric Key Cryptography	
+		[ ]				[x]				faster
+		[x]				[x]				can be implemented in hardware
+		[ ]				[x]				key exchange over unsecure channel
+		[ ]				[x]				based on rounds
+		[x]				[x]				part of hybrid crypto scheme
+		[x]				[ ]				uses key pairs
+		[x]				[ ]				RSA
+		[ ]				[x]				One time pad
+		
+	4. Alice wants to send an encrypted message to Bob using Public Key Cryptography. To encrypt, she uses ___
+		[ ] The symmetric key
+		[ ] The session key
+		[x] Bob's public key
+		[ ] Bob's private key
+		[ ] Alice's public key
+		[ ] Alice's private key
+		
+	5. What is the result when encrypting 1101 1001 1010 with OTP 1100 1011 0010? 
+		> 0001 0010 0000
+
+-------------------------------------------------------------------
+CHAPTER 3:AUTHENTICATION
+	1. How is a certificate called where Subject Name and Issuer Name are identical?
+		[ ] Certificate Signing Request
+		[x] Root Certificate
+		[ ] Certificate Authority
+		[ ] OCSP
+		[ ] Extended Validation Certificate
+		
+	2. Which key(s) from whom are included in a Certificate Signing Request? 
+		[x] Subject's Public Key
+		[ ] Subject's Private Key
+		[ ] Issuer's Public Key
+		[ ] Issuer's Private Key
+	
+	3. What is the size of the password domain if only numbers are allowed and the size of the password is at least 1 and at most 4 digits?
+		> 9C1 + 9C2 + 9C3 + 9C4	
+	
+	4. Possible Factors for Authentication are ___
+		[ ] What you wear
+		[x] What you have
+		[ ] What you can prove
+		[x] What you know
+		[x] What you are
+		[ ] What you say
+		[ ] What you need	
+	
+	5. What elements does a certificate contain? 
+		[x] Identity of the Subject
+		[ ] Identity of the Issuer
+		[ ] Issuer's Private key
+		[ ] Issuer's Public key
+		[x] Issuer's Digital signature
+		[ ] Subject's Private key
+		[x] Subject's Public key
+		[ ] Subject's Digital signature
+		
+	6. What are bad choices for keeping passwords secure
+		[x] Loaning your password to a friend or colleague
+		[ ] Storing them in an encrypted password safe
+		[x] Choosing one very secure password and using it everywhere
+		[x] Using a simple password that you can easily remember without writing it down
+		[x] Writing them down and storing them in a secure place
+		[ ] Generate a password randomly
+		
+	7. Which statements are true?
+		[x] A digital signature has a fixed length.
+		[ ] A digital signature for a document is unique and will not match any other document
+		[x] It should practically be impossible to compute a message that has a given digital signature
+		[x] If the message changes only slightly, the digital signature should also only change slightly
+		[ ] Possibly infinitely many messages map to the same signature
+		[ ] A digital signature is independent of the message that is signed
+		[x] It should practically be impossibe to calculate two messages having the same signature
+		
+	8. OCSP stands for __
+		> Online Certificate Status Protocol
+
+-------------------------------------------------------------------
+CHAPTER 4: OPERATING SYSTEMS
+	1. What is the name for the feature of an OS to hide complicated details from users and applications which otherwise had to be dealt with?
+		> extended machine
+	
+	2. What is hardening?
+		> reducing its surface of vulnerability
+		
+	3. How can OS-specific mechanisms to protect an unencrypted file from unauthorized access be circumvented?
+		> boot with diif os
+		> eject hhd
+	
+-------------------------------------------------------------------
+CHAPTER 5: OPERATING SYSTEMS
+	1. How is a maliciously injected script which is permanently stored on the target servers,such as in a database, in a message forum, visitor log, comment field, etc calles whichthe victim retrieves from server when it requests information?
+		> Stored Cross Site Sripting
+		
+	2. Define the term Command Injection
+		> attacker can use OS script (shell cript) 
+		
+	3.If http://192.168.1.50/dvwa/vulnerabilities/xss_r/?name=<script>alert("Alarm!")</script># results in the Java-Script code being executed, it is an example of ___ 
+		[ ] Cross Site Request Forgery
+		[x] Reflected Cross Site Scripting
+		[ ] DOM-based Cross Site Scripting
+		[ ] Stored Cross Site Scripting
+		[ ] Command Injection
+		[ ] SQL Injection
+	
+	4. Mark the right answers 
+			is directed a the server 	is directed at the client	uses a context between client and server
+		CSRF	[x]				[ ]				[x]
+		XSS	[ ]				[x]				[ ]
+		
+-------------------------------------------------------------------
+CHAPTER 9: FIREWALL
+	1. Define Firewall
+		> stands between internet and intranet
+		> control traffic both networks by policies
+		> filter out and stop unwanted traffic 
+	
+	2. What are components of a firewall
+		 [ ] Application Filter
+		 [x] Application Level Gateway
+		 [ ] Application Firewall
+		 [ ] Packet Application
+		 [x] Packet Filter
+		 [ ] Packet Level Gateway
+		 
+	3. What does DMZ stand for
+		> demilitarized zone
+		
+	4. How is the translation of a private to a public IP address called?
+		[ ] DMZ
+		[ ] SSH
+		[ ] ALG
+		[ ] ALF
+		[x] NAT
+		[ ] RTA
+		
+	5. What are Disadvantages of Packet Filters?
+		[x] Do not work well with encrypton
+		[x] No user-level filtering
+		[ ] Separate filter needed for each application
+		[ ] Work transparently
+		[x] Can be circumvented by tunneling
+		[ ] Hard to administrate
+		[x] Cannot filter well based on application data
+		
+	6. Name Advantages of Packet Filters
+		> filter out unwanted data
+	
+-------------------------------------------------------------------
+CHAPTER 10: VPN	
+	1. Which Virtual Interface is used for a Site-to-Site OpenVPN
+		[x] TUN
+		[ ] TAP
+		[ ] GO
+		[ ] VAP
+		[ ] ETHXXX, depending on what interface is active
+		[ ] ESP
+	
+	2. Which Protocols belong to IPsec?
+		[ ] IP
+		[ ] TCP
+		[x] AH
+		[x] EPS
+		[ ] TLS
+		[ ] UDP
+		[ ] ESP
+		[ ] Ethernet
+		
+	3. Mark all protocols visible on wireshark which you can observe if you record OpenVPN on the Ethernet-Interface of a machine
+		[ ] IP
+		[ ] TCP
+		[ ] AH
+		[ ] EPS
+		[ ] TLS
+		[ ] UDP
+		[ ] ESP
+		[ ] Ethernet
+		
+	4. For a VPN with IPsec ___
+		[x] tunnel mode is used
+		[ ] transport mode is used
+		[x] ESP is used
+		[x] TCP is used
+		[x] AH is used
+		
+	5. Explain the term "Split Tunneling" and discuss its advantages/disadvantages ___
+		> can use public and private network at the same time, decide which data go through VPN tunnel
+		> ads:
+			>> fast
+			>> enable access to multiple networks
+		> dis:
+			>> attacker attacks public interface => gain access to the private VPN  => expose private network interface
+		
+	6. What does IKE stand for ___
+		> Internet Key Exchange 
+		
+	7. Mark all that applies: A VPN
+		[x] encrypts data End-to-End
+		[x] is transparent to the application layer
+		[ ] requires the modification of applications if to be used
+		[x] may be used without a user of the VPN knowing it is there
+		[x] requires tunneling
+		[x] can be used as central access point into an intranet from the outside
+
+-------------------------------------------------------------------
+CHAPTER 13: NETWORK APPLICATIONS	
+	1. Which protocols can beused when sending/receiving Email?
+		[ ] SMTP from Sender to Sender's Mail server to receive mail
+		[x] SMTP from Sender to Sender's Mail server to send mail
+		[ ] IMAP from Sender to Sender's Mail server to receive mail
+		[ ] IMAP from Sender to Sender's Mail server to send mail
+		[ ] IMAP between Mail servers
+		[x] POP between Mail servers
+		[x] SMTP between Mail servers
+		
+	2. Mark all correct statements:
+		[x] If POP runs not over SSL/TLS, username an password can be eavesdropped
+		[x] IMAP can run over an encrypted connection
+		[ ] IMAP is already encrypred itseld
+		[x] An email can potetially be read on the mail server by the administrator
+		[ ] Email is always end-to-end encrypted
+		[ ] S/MIME is unnecessary if TLS is used on all transport links
+		[x] S/MIME does not encrypt the email header including the subject
+		
+	3. Describe how SSH Port Forwarding works
+		> Connections from an SSH client are forwarded, via an SSH server, to the intended destination server
+		
+	4-13. A user successfully starts an ssh connection from Host A using the command ssh -L 8888:10.2.4.37:80 -g 10.2.4.99
+	4. What is the IP Address of the SSH Client?
+		> 192.168.1.100
+	
+	5. What is the IP Address of the SSH Server?
+		> 10.2.4.99
+	
+	6. A Web Browser on Host B contacts Host A on Port 8888. Which Web Server would answer the request?
+		> 10.2.4.37:80
+	
+	7. From the Web Server’s perspective, where is the request coming from (Source IP address?)
+		> 10.2.4.99
+	
+	8. What does the -g-option in the command do?
+		> Global
+		> Allows remote hosts to connect to local forwarded ports
+		
+	9. Name Source IP, Destination IP, Ports and Transport Protocol of the connection carrying the traffic in network 172.16.2.0/24 
+		> Source IP: 192.168.1.100
+		  Destination IP: 10.2.4.99
+		  Source Ports: ephemeral
+		  Destination Ports: 22
+		  Transport protocol: TCP
+	
+	10. After shutting down the SSH connection, a new connection is successfully established from Host A using the command ssh -g -D 9999 10.2.4.37. How is this feature of SSH called?
+		> dynamic port forwarding
+	
+	11. A Web Browser on Host B wants to contact Host A on Port 9999 in order to connect to the Web Server on Host C. How would the Browser need to get configured?
+		> configure proxy on browser with 
+			SOCKS Host: 192.169.1.100
+			SOCKS Port: 9999
+		
+	12. What address line would the user need to put into the browser?
+		> 10.2.4.37
+		
+	13. Discuss the consequences of ssh port forwarding from a security perspective.
+		>

@@ -338,7 +338,12 @@ CHAPTER 8: NETWORK SECURITY
 			. protection: 
 				> encrypt data while transfer => only protect the content, not apply to the header of communication protocol 
 				> Authentication and difital signature
-		+ Address Resolution Protocol (ARP) Spoofing:
+		+ Address Resolution Protocol (ARP) Spoofing: 
+			. is Man in the Middle (MitM)
+			. works:
+				> attacker has access to the network 
+				> an attacker sends spoofed ARP messages onto a local area network
+				> The forged responses advertise that the correct MAC address for both IP addresses, belonging to the router and workstation, is the attacker’s MAC address
 		+ IP Spoofing:
 		+ TCP Sequence Number Attack
 		+ DNS Spoofing
@@ -402,15 +407,8 @@ CHAPTER 9: FIREWALL
 	- Limits of packet filter:
 		+ No user data / application specific filtering possible
 		+ use of transport layer info to identify application protocols
-		+ apps with varying port num
+		+ apps with varying port numS
 		+ cannot use tunneling and encryption
-	-sudo iptables:
-		-v -L :List of IPs
-		-A : add
-		-p : protocol
-		-j : action/job
-		Ex: sudo iptables -v -L
-		    sudo iptables -A FORWARD -p ICMP -j DROP
 	- Network Address Translation (NAT):
 		+ private ip want to serve in the internet => convert private address to public address => for contacting the services in the internet
 		+ observe the 1st packet of 3 way handshake => setup the translation(IP and port)
@@ -442,34 +440,43 @@ CHAPTER 9: FIREWALL
 CHAPTER 10: VIRTUAL PRIVATE NETWORKS - VPN
 	- Allows to run a secure point-to-point connection between 2 stations 
 	- Can be soft/hardware
-	- Types:
-		+ Site-to-site
-	_ Security mechanism:
-		+ IPsec:
-			. security services n network layer
-			. work with IPv4 and IPv6
-			. below IP protocol
-			. IPsec protect the IP packet being processed on machine
+	- Remote Access Server (RAS): 
+		+ Tunneling secure connection from Client in public network to the Server inside the intranet over the insecure network
+		+ works:
+			. the VPN Client contacts the VPN Server through a handshake with authentication and negotiation of encryption credential => traffic will be encrypted
+			. VPN Server will hand out its VPN IP-Address to VPN Client 
+			. VPN Client uses this IP to send requests for accessing to the resources in the Intranet
+	- Site-to-Site (STS):
+		+ connect gateways together
+		+ based on destination IP address, packet will be encrypted and encapsulated
+		+ decapsulated and decrypted on the other site 
+	- IPsec:
+		+ is concept of security association which is the contract between 2 stations
+		+ Internet Key Exchange (IKE) Protocol for exchanging key to establish security association in both directions => stored in a database => specify in all packets => know what to do 
+		+ security services in network layer
+		+ work with IPv4 and IPv6
+		+ below IP protocol
+		+ IPsec protect the IP packet being processed on machine
 	- Authentication header (AH): 
 		+ allow for authentication of the sender to ensure the integrity of protected packet, no encryption
-		+ in transport mode: IP header remain unchanged, IP header is authentication header which content the info
-		+ in tunnel mode: new IP header => authenticate a header field (AH), IP header(original), data
 	- Encapsulating security payload (ESP): 
 		+ allow for authentication of the sender to ensure the integrity of protected packet as wll as encryption
 		+ used to check integrity and confidential
-		+ in transport mode: data and ESP trailer with the encryption
-		+ in tunnel mode: Integrity Check Value will be encypted with IP header, data, ESP trailer
+	- Tunnel mode: if there is security association → packets will be encapsulated and tunneled → decapsulated in a specific place
+	- Transport mode: end-to-end encryption of packets; no encapsulation; payload is processed by IPsec → cannot use in VPN
 	- OpenVPN:
 		+ IPsec is limited to receiving and transmitting data on the network layer
 		+ more flexible and can operate on the network layer and data link layer
 		+ transmit data between 2 new virtual interface Open
 		+ use transport protocol TLS/SSL
+		+ working on network layer (TUN: routes packet) and data link layer (TAP: bridge 2 computers)
 		+ works: 
 			. creating vitual interfaces in user space 
 			. set up a direct point to point connection between 2 new virtual interface
-
+	- Replay attack: record encrypted packet on the wire and send later ⇒ command might be executed again or denial of servic
+	- Sequence number: replay protecttion
 	- Risk:
-		+ timeSplit tunneling
+		+ Split tunneling
 			. client can use public and local network at the same time
 			. decide which data sent through VPN tunnel 
 			. advantages: 
@@ -500,32 +507,71 @@ CHAPTER 13: NETWORK APPLICATION
 			. multiple logical channels
 		+ SSH channel for advanced functions (forward GUI,...)
 		+ SSH Port Forwarding:
-			. Local Port Forwarding (transparent):
+			. Local Port Forwarding (transparent): connections from the SSH client are forwarded via the SSH server, then to a destination server
 				> A has SSH connection with B
 				> D wants to connect to S
 				> D establish TCP connection with A at port A : x
 				> A sends encrypted data to B
 				> B establish TCP connection with S at port S : y
 				⇒ get access to a server without the access rights ⇒ bypass firewall & no authentication needed
-			. Remote Port Forwarding
-			. Dynamic Port Forwarding (not transparent):
+			. Remote Port Forwarding: connections from the SSH server are forwarded via the SSH client, then to a destination server
+			. Dynamic Port Forwarding (not transparent): connections from various programs are forwarded via the SSH client, then via the SSH server, and finally to several destination servers
 				> A has SSH connection with B
 				> D establish SOCKS Proxy connection with A at port A : x
 				> A sends encrypted data to B
 				> B establish SOCKS Proxy connection with Destination specified By Host D
+
 	- World Wide Web
 	
 -------------------------------------------------------------------
 ipsec - network / datalink
 openvpn - transport
 ssh - application
-	
-	
-	
-	
-	
-	
-	
+┌───────────────────────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┬───────────────┐
+│			│ Application	│ Presentation	│ Session	│ Transport	│ Network	│ Data Link	│ Physical	│
+├───────────────────────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┼───────────────┤
+│ Security Mechanism	│ X/MINE	│ 		│ 		│ TLS/SSL	│ IPSec		│ IEEE 802.1X	│ 		│
+└───────────────────────┴───────────────┴───────────────┴───────────────┴───────────────┴───────────────┴───────────────┴───────────────┘
+
+-------------------------------------------------------------------
+- Rule Chain:
+	-v: Displays verbose output
+	-L: List
+	-A: Append
+	-D: Delete
+	-E: Rename
+	-F: Flush
+	-d: destination
+	-p: Protocol
+		> icmp
+		> tcp
+		> udp
+		> all
+	--tcp-flags: Allows TCP packets with specific set bits, or flags, to match a rule
+		> ACK
+		> FIN
+		> PSH
+		> RST
+		> SYN
+		> URG
+		> ALL
+		> NONE
+	-j: Jumb
+		> ACCEPT
+		> DROP
+		> QUEUE
+		> RETURN
+		> LOG
+		> MARK
+		> REJECT
+	Ex: sudo iptables -v -L
+	    sudo iptables -A FORWARD -p ICMP -j DROP
+	    
+- SSH:
+	-L: local port forwarding
+	-R: remote port forwarding
+	-D: dynamic port forwarding
+	-g: Allows remote hosts to connect to local forwarded ports
 	
 	
 	
