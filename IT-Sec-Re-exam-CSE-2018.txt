@@ -1,0 +1,113 @@
+(1.A) What is a Certificate? Which components does it contain?
+	- Certificate is the electronic document to authentitatively the digital signature of the owner
+	- Identity of subject, public key of subject, digital signature of issuer
+
+(1.B) What is a Certificate Authority and what does it do exactly?
+	- the entity which stores, signs, and issues digital certificates
+	- acts as a trusted third party by the owner of the certificate and by the party relying upon the certificate
+
+(1.C) In an X.509 Certificate, how do I recognize a Root Cerfiticate?
+	- issuer = subject
+
+(1.D) Name two advantages of using Certificates.
+	- authenticity, integrity, nonrepudiation
+
+(1.E) What is Certificate Revocation and when do I need it? How can a user find out if a Certificate was revoked?
+	- List of digital certificates have been revoked
+	- How to check:	
+		+ Certificate Revocation List (CRL)
+			. download whole CRL database
+			. loop through it to check 
+			. if cannot download CRL => trust the certificate
+		+ Online Cerrtificate Status Protocol (OCSP)
+		+ Online Cerrtificate Status Protocol Stapling
+			. at regular interval, seb server contact OCSP responder to check status of a certificate 
+			. OCSP responder sends back timestamp signed by CA
+			. When client want to connect to the server, the server sends the timestamp with certificate during the SSL/TLS handshake
+			
+(1.F) What is OCSP, how does it work and why is it needed?	
+	- Online Certificate Status Protocol works
+		+ web server sends its certificate to the client
+		+ web client concerned that the certificate may have been revoked, creates an OCSP request to the CA
+		+ OCSP responder uses the certificate serial number to check status and responds with values:
+			. good
+			. revoked
+			. unknown
+		+ The CA responder keeps frequent updates with CRL server to make sure to list is current
+	- Why need it		
+		- Faster than Certificate Revocation List
+		- Reducing overhead and burden on the client <= still huge burden on client
+	
+(1.G) What is a Certificate Signing Request? Which keys of the subject does the Signing Request contain?
+	- web server requests CA to sign Certicate with Identity of subject, public key of subject, digital signature of issuer
+	- public key
+	
+(3.A) In which mode and protocol is IPSec used when facilitating a VPN?	
+	- IP
+
+(3.B) What does DoS stand for?
+	- Denial of Service
+			
+(3.C) Which of the CIA-principles can usually not be achieved by cryptograhpic means?
+	- Availability
+	
+(3.E) What does AES stand for?
+	- Advanced Ecryption Standard
+	
+(3.F) What is the size of the password domain if only numbers are allowed and the size of the passwort is at least 1 and at most 5 digits?
+	- 10 + 10^2 + 10^3 + 10^4 + 10^5
+	
+(3.G) The three possible factors for authenticaton are what you are, what you have and what you
+	- know
+
+(3.H) What is the name for the feature of an OS to hide complicated details from users and applications which otherwise had to be dealt with?
+	- extended machine
+
+(3.I) How is a maliciously injected script which is permanently stored on the target servers, such as in a database, in a message forum, visitor log, comment field, etc calles which the victim retrieves from server when it requests information?
+	- Stored Cross Site Sripting
+	
+(3.J) What is an alternative name for DNS-Spoofing?
+	- pharming 
+	
+(3.K) Name a security mechanism on the Data Link Layer
+	- IEEE 802.1X
+		
+(3.L) On which layer does SSH work?
+	- Application Layer Protocol
+	
+(3.M) How is the translation of a private to a public IP address called?
+	- Network Address Translation
+	
+(3.N) Where would you typically place a server in a company network which must be reachable from the public Internet?
+	- in DMZ
+	
+(3.O) How are Firewall components called which work above the Transport Layer?
+	- application level gateway 
+
+(3.P) Which protocol is used in OpenVPN to encrypt the data between two endpoints?
+	- SSL/TLS
+
+(3.Q) Which virtual interface is used in OpenVPN for a site-to-site connection?
+	- TUN device
+
+(3.R) Which protocol is used for the proxy in ssh in dynamic port forwarding?
+	- SOCKS
+
+(3.S) What is the first message in an SSL/TLS handshake?
+	- Client Hello
+
+(3.T) How is an exploit called which is not yet publicly known?
+	- Zero-day Exploit
+
+(3.U) What is the result when decrypting the ciphertext 0000 1111 0101 with one time pad 0110 0101 0011?
+	- 0110 1010 0110
+
+(3.V) The TLS record protocol may contain records of four different protocols. The ClientHello message is part of which ot these protocols?
+	- handshake
+
+(3.W) Define the term Confidentiality in one sentence.
+	- protection against unauthorized access
+
+(3.X) What does CBC stand for?
+	- Cipher Block Chaining
+
