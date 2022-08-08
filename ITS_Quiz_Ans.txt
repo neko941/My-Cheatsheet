@@ -25,12 +25,12 @@ CHAPTER 1: INTRODUCTION
 		[ ] Nonrepudiation
 		
 	4. Which of the CIA-principles can usually not be achieved by cryptograhpic means?
-		[ ] Availability
-		[x] Authentication
-		[x] Authorization
+		[x] Availability
+		[ ] Authentication
+		[ ] Authorization
 		[ ] Confidentiality
 		[ ] Integrity
-		[x] Nonrepudiation
+		[ ] Nonrepudiation
 		
 	5. Define "Nonrepudiation":
 		> ability to prove that a given message was sent and by whom to a thied party not involved in communication
@@ -44,7 +44,7 @@ CHAPTER 1: INTRODUCTION
 		[ ] Unkown Exploit
 		[ ] Malicious Exploit
 		[ ] Cross-site Exploit
-		[ ] Zero-day Exploit
+		[x] Zero-day Exploit
 		[ ] Serect Exploit
 
 -------------------------------------------------------------------
@@ -55,11 +55,11 @@ CHAPTER 2: CRYPTOGRAPHY
 	2. AES ___
 		[ ] stands for Automatically Encrypted Session
 		[ ] uses a block size of 64 bits
-		[ ] may use a key of size 256 bits
-		[ ] can be used with Cipher Block Chaining
+		[x] may use a key of size 256 bits
+		[x] can be used with Cipher Block Chaining
 		[ ] is a Public Key cryptosystem
 		[ ] is a hybrid crypto scheme
-		[ ] is organized in rounds
+		[x] is organized in rounds
 		[ ] shound not be used anymore
 		
 	3. Mark the right answers 

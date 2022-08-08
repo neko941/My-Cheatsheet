@@ -5,12 +5,9 @@ CHAPTER 1: INTRODUCTION
 		+ stored, retrieved, proccessed electronically
 		+ to protect valuable asset
 	- what: 
-		+ protect asgainst:
-			. unauthorized access 
-			. modification
+		+ protect asgainst unauthorized access / modification
 		+ availability of info sys services for legitimate users
 		+ measure to avoid thwart, dicover and log threats
-		
 	- Aims:
 		+ Confidentiality: protection against unauthorized access
 		+ Integeirty: protection against unauthorized modification
@@ -127,6 +124,8 @@ CHAPTER 3: AUTHENTICATION
 			. sender signs message with private key
 			. public key is used for validation
 		+ Only a “fingerprint” of the message is digitally signed
+	- Certificate Authority: company / organization that validate identity of entities
+	- Root CA: CA the signs its own certificate
 	- Cryptographic Hash Function:
 		+ convert data to a fixed length string
 		+ mostly 128 or 256 bit
@@ -303,8 +302,8 @@ CHAPTER 5-3: MALWARE
     - Damages:
         + Destroy the hardware / software
         + Reduced usability of machine
-        + data infiltration / misuse
         + misuse of sys
+        + data infiltration / misuse
         + cost of removal
     - Malware reacting / cleaning:
         + shutdown the machine / disconnect from network
@@ -343,7 +342,7 @@ CHAPTER 8: NETWORK SECURITY
 			. works:
 				> attacker has access to the network 
 				> an attacker sends spoofed ARP messages onto a local area network
-				> The forged responses advertise that the correct MAC address for both IP addresses, belonging to the router and workstation, is the attacker’s MAC address
+				> The forged responses advertise that the correct MAC address is the attacker’s MAC address
 		+ IP Spoofing:
 		+ TCP Sequence Number Attack
 		+ DNS Spoofing
@@ -438,8 +437,9 @@ CHAPTER 9: FIREWALL
 
 -------------------------------------------------------------------
 CHAPTER 10: VIRTUAL PRIVATE NETWORKS - VPN
-	- Allows to run a secure point-to-point connection between 2 stations 
-	- Can be soft/hardware
+	-VPN:
+		+ Allows to run a secure point-to-point connection between 2 stations 
+		+ Can be soft/hardware
 	- Remote Access Server (RAS): 
 		+ Tunneling secure connection from Client in public network to the Server inside the intranet over the insecure network
 		+ works:
@@ -506,7 +506,7 @@ CHAPTER 13: NETWORK APPLICATION
 			. TCP port 22
 			. multiple logical channels
 		+ SSH channel for advanced functions (forward GUI,...)
-		+ SSH Port Forwarding:
+		+ SSH Port Forwarding: method of transporting arbitrary data over an encrypted SSH connect
 			. Local Port Forwarding (transparent): connections from the SSH client are forwarded via the SSH server, then to a destination server
 				> A has SSH connection with B
 				> D wants to connect to S
