@@ -118,13 +118,19 @@ CHAPTER 3: AUTHENTICATION
 		+ wat u r: biometry
 			. fingerprint
 			. eyeprint
+	- Certificate: Certificate is the electronic document to authentitatively the digital signature of the owner
 	- Digital Signature:
 		+ aims: authenticity, integrity, nonrepudiation
 		+ public key cryptography: 
 			. sender signs message with private key
 			. public key is used for validation
 		+ Only a “fingerprint” of the message is digitally signed
-	- Certificate Authority: company / organization that validate identity of entities
+	- Certificate Authority: 
+		+ the entity which stores, signs, and issues digital certificates
+		+ company / organization that validate identity of entities
+		+ acts as a trusted third party by the owner of the certificate and by the party relying upon the certificate
+	- Vertificate Signing Request:
+		+ web server requests CA to sign Certicate with Identity of subject, public key of subject, digital signature of issuer
 	- Root CA: CA the signs its own certificate
 	- Cryptographic Hash Function:
 		+ convert data to a fixed length string
